@@ -39,6 +39,17 @@ extension NewsFeedViewController: UICollectionViewDataSource {
         cell.backgroundColor = .white
           return cell
     }
+    
+    private func fetchStroies(for section: String = "Technology") {
+        NYTTopStoriesApIClient.fetchTopStories(for: section) {(result) in
+            switch result {
+            case .failure(let appError):
+                print("error fetching stories: \(appError)")
+            case .success(let articles):
+                print("found \(articles.count)")
+            }
+        }
+    }
   
 }
 
