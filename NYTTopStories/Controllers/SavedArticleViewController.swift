@@ -1,5 +1,5 @@
 //
-//  TopStoriesTabController.swift
+//  SavedArticleViewController.swift
 //  NYTTopStories
 //
 //  Created by Yuliia Engman on 2/6/20.
@@ -8,12 +8,11 @@
 
 import UIKit
 
-class TopStoriesTabController: UITabBarController {
-    
+class SavedArticleViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .yellow
+        view.backgroundColor = .orange
     }
-    
-    
+
 }
