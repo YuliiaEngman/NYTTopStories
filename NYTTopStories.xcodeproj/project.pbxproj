@@ -20,6 +20,7 @@
 		0F678FAD23EC8520003E2921 /* TopStoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F678FAC23EC8520003E2921 /* TopStoryModel.swift */; };
 		0F678FB023EC8622003E2921 /* NYTTopStoriesApIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F678FAF23EC8622003E2921 /* NYTTopStoriesApIClient.swift */; };
 		0F678FB323EC8671003E2921 /* ImageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0F678FB223EC8671003E2921 /* ImageKit */; };
+		0F678FB623EC8BDD003E2921 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F678FB523EC8BDD003E2921 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		0F678FAA23EC714F003E2921 /* NewsFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedView.swift; sourceTree = "<group>"; };
 		0F678FAC23EC8520003E2921 /* TopStoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoryModel.swift; sourceTree = "<group>"; };
 		0F678FAF23EC8622003E2921 /* NYTTopStoriesApIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTTopStoriesApIClient.swift; sourceTree = "<group>"; };
+		0F678FB523EC8BDD003E2921 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				0F678F7F23EC6B70003E2921 /* SceneDelegate.swift */,
 				0F678F8623EC6B74003E2921 /* Assets.xcassets */,
 				0F678F8823EC6B74003E2921 /* LaunchScreen.storyboard */,
+				0F678FB523EC8BDD003E2921 /* Config.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				0F678FAD23EC8520003E2921 /* TopStoryModel.swift in Sources */,
 				0F678F8023EC6B70003E2921 /* SceneDelegate.swift in Sources */,
 				0F678FAB23EC714F003E2921 /* NewsFeedView.swift in Sources */,
+				0F678FB623EC8BDD003E2921 /* Config.swift in Sources */,
 				0F678FA423EC6E50003E2921 /* NewsFeedViewController.swift in Sources */,
 				0F678FA823EC6E8D003E2921 /* SettingsViewController.swift in Sources */,
 			);
