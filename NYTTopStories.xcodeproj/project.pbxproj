@@ -91,6 +91,7 @@
 		0F678F7C23EC6B70003E2921 /* NYTTopStories */ = {
 			isa = PBXGroup;
 			children = (
+				0F678FB423EC87B0003E2921 /* NetworkServices */,
 				0F678FA923EC711A003E2921 /* Views */,
 				0F678FA223EC6E29003E2921 /* Controllers */,
 				0F678FA123EC6E08003E2921 /* Supporting Files */,
@@ -143,9 +144,16 @@
 			isa = PBXGroup;
 			children = (
 				0F678FAC23EC8520003E2921 /* TopStoryModel.swift */,
-				0F678FAF23EC8622003E2921 /* NYTTopStoriesApIClient.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		0F678FB423EC87B0003E2921 /* NetworkServices */ = {
+			isa = PBXGroup;
+			children = (
+				0F678FAF23EC8622003E2921 /* NYTTopStoriesApIClient.swift */,
+			);
+			path = NetworkServices;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
