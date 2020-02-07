@@ -136,8 +136,8 @@
 				0F678F9F23EC6C4D003E2921 /* TopStoriesTabController.swift */,
 				0F678FA723EC6E8D003E2921 /* SettingsViewController.swift */,
 				0F678FA323EC6E50003E2921 /* NewsFeedViewController.swift */,
-				0F678FA523EC6E72003E2921 /* SavedArticleViewController.swift */,
 				0F678FBC23EDCB6D003E2921 /* ArticleDetailViewController.swift */,
+				0F678FA523EC6E72003E2921 /* SavedArticleViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

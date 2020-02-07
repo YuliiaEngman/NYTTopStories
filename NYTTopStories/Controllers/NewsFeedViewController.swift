@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import DataPersistence
 
 class NewsFeedViewController: UIViewController {
     
     private let newsFeedView = NewsFeedView()
+    
+    // DP Step 5. Since we need an instance pass the article detailVC
+    //we declaring instance we created in TabBarController
+    //(remember import DataPersistance)
+    public var dataPersistance: DataPersistence<Article>!
     
     // data for our collection view
     private var newsArticles = [Article]() {
@@ -88,6 +94,10 @@ extension NewsFeedViewController: UICollectionViewDelegateFlowLayout {
         
         // TODO: after assessment we will be using initializers as dependancy injection mechanism
         articleDVC.article = article
+        
+        // DP Step 6. Setting up data persistance and its delegate
+        // passinge the persistance
+        articleDVC.dataPersistance = dataPersistance
         
         // we cannot use navigation controller to push viewcontroller
         // UNTIL WE EMBADE IT TO NAVIGATION CONTROLLER

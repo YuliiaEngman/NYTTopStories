@@ -8,10 +8,17 @@
 
 import UIKit
 import ImageKit
+import DataPersistence
+
 
 class ArticleDetailViewController: UIViewController {
     
     public var article: Article?
+    
+    // DP Step 7. Declaring up data persistance
+    // declaring of the same instance we created in TabBarController
+    //(remember import DataPersistance)
+    public var dataPersistance: DataPersistence<Article>!
     
     private let articleDetailView = ArticleDetailView()
     
@@ -52,9 +59,17 @@ class ArticleDetailViewController: UIViewController {
         }
     }
     
+    // DP Step 8. Setting up data persistance 
     @objc
     func saveArticleButtonPressed(_ sender: UIBarButtonItem){
-        print("saved article button pressed")
+        //print("saved article button pressed")
+        guard let article = article else { return }
+        do {
+            //SAVING TO DOCUMENT DIRECTORY
+            try dataPersistance.createItem(article)
+        } catch {
+            print("error saving article: \(error)")
+        }
     }
     
 
