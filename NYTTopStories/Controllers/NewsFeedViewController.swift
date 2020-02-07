@@ -24,8 +24,24 @@ class NewsFeedViewController: UIViewController {
         
         // register a collectionView cell
         // we use generic cell
-        newsFeedView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "articleCell")
+//        newsFeedView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "articleCell")
+        
+        // register a NewCell
+        newsFeedView.collectionView.register(NewsCell.self, forCellWithReuseIdentifier: "articleCell")
+        
+        fetchStroies()
     }
+    
+       private func fetchStroies(for section: String = "Technology") {
+         NYTTopStoriesApIClient.fetchTopStories(for: section) {(result) in
+             switch result {
+             case .failure(let appError):
+                 print("error fetching stories: \(appError)")
+             case .success(let articles):
+                 print("found \(articles.count)")
+             }
+         }
+     }
 
 }
 
@@ -38,17 +54,6 @@ extension NewsFeedViewController: UICollectionViewDataSource {
           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath)
         cell.backgroundColor = .white
           return cell
-    }
-    
-    private func fetchStroies(for section: String = "Technology") {
-        NYTTopStoriesApIClient.fetchTopStories(for: section) {(result) in
-            switch result {
-            case .failure(let appError):
-                print("error fetching stories: \(appError)")
-            case .success(let articles):
-                print("found \(articles.count)")
-            }
-        }
     }
   
 }
