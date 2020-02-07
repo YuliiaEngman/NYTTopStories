@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageKit
 
 // custom programmatic cell
 class NewsCell: UICollectionViewCell {
@@ -88,5 +89,22 @@ class NewsCell: UICollectionViewCell {
         ])
     }
     
+    public func configureCell(with article: Article) {
+        articleTitle.text = article.title
+        abstractHeadline.text = article.abstract
+        
+        newsImageView.getImage(with: article.getArticleImageURL(for: .thumbLarge)) {[weak self](result) in
+            switch result {
+            case .failure:
+                DispatchQueue.main.async {
+                    self?.newsImageView.image = UIImage(systemName: "exclamationmark-octagon")
+                }
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self?.newsImageView.image = image
+                }
+            }
+        }
+    }
 }
 

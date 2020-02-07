@@ -12,6 +12,15 @@ class NewsFeedViewController: UIViewController {
     
     private let newsFeedView = NewsFeedView()
     
+    // data for our collection view
+    private var newsArticles = [Article]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.newsFeedView.collectionView.reloadData()
+            }
+        }
+    }
+    
     override func loadView() {
         view = newsFeedView
     }
@@ -33,12 +42,13 @@ class NewsFeedViewController: UIViewController {
     }
     
        private func fetchStroies(for section: String = "Technology") {
-         NYTTopStoriesApIClient.fetchTopStories(for: section) {(result) in
+         NYTTopStoriesApIClient.fetchTopStories(for: section) {[weak self](result) in
              switch result {
              case .failure(let appError):
                  print("error fetching stories: \(appError)")
              case .success(let articles):
-                 print("found \(articles.count)")
+                // print("found \(articles.count)")
+                self?.newsArticles = articles
              }
          }
      }
@@ -47,13 +57,18 @@ class NewsFeedViewController: UIViewController {
 
 extension NewsFeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        //return 50
+        return newsArticles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath)
-        cell.backgroundColor = .white
-          return cell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? NewsCell else {
+            fatalError("could not downcast to NewsCell")
+        }
+        let article = newsArticles[indexPath.row]
+        //cell.backgroundColor = .white
+        cell.configureCell(with: article)
+        return cell
     }
   
 }
