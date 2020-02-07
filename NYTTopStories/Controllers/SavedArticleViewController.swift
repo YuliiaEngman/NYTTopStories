@@ -22,9 +22,27 @@ class SavedArticleViewController: UIViewController {
     // create an array of savedArticle = [Article] - didSet
     // TODO: reload collection view in didSet of thesavedArticles array DataPersistance method
 
+    // DP Step 11. Conforming to the DataPersistanceDelegate
+    private var savedArticles = [Article]() {
+        didSet {
+            print("there are \(savedArticles.count) articles")
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .orange
+        
+        // DP Step 13. Call the function
+        //fetchSavedArticles()
+    }
+    
+    // DP Step 12. Conforming to the DataPersistanceDelegate
+    private func fetchSavedArticles(){
+        do {
+            savedArticles = try dataPersistance.loadItems()
+        } catch {
+            print("error fetching articles: \(error)")
+        }
     }
 }
 
@@ -32,6 +50,8 @@ class SavedArticleViewController: UIViewController {
 extension SavedArticleViewController: DataPersistenceDelegate {
     func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
         print("item was saved")
+        fetchSavedArticles() // using it to test
+
     }
     func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
         print("item was deleted")
