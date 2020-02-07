@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageKit
 
 class ArticleDetailViewController: UIViewController {
     
@@ -29,10 +30,26 @@ class ArticleDetailViewController: UIViewController {
     }
     
     private func updateUI() {
+        //TODO: refactor and setup in ArticleDetailView
+        // e.g. articleDetailView.configureView(for article: article)
         guard let article = article else {
             fatalError("did not oad article")
         }
         navigationItem.title = article.title
+        articleDetailView.abstractHeadline.text = article.abstract
+        articleDetailView.newsImageView.getImage(with: article.getArticleImageURL(for: .superJumbo)) { [weak self] (result) in
+            switch result {
+            case .failure:
+                DispatchQueue.main.async {
+                    self?.articleDetailView.newsImageView.image = UIImage(systemName: "exclamationmark-octogon")
+                }
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self?.articleDetailView.newsImageView.image = image
+                }
+            }
+            
+        }
     }
     
     @objc
