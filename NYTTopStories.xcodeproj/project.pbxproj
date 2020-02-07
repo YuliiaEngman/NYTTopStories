@@ -22,6 +22,8 @@
 		0F678FB323EC8671003E2921 /* ImageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0F678FB223EC8671003E2921 /* ImageKit */; };
 		0F678FB623EC8BDD003E2921 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F678FB523EC8BDD003E2921 /* Config.swift */; };
 		0F678FBB23EDB6E0003E2921 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F678FBA23EDB6E0003E2921 /* NewsCell.swift */; };
+		0F678FBD23EDCB6D003E2921 /* ArticleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F678FBC23EDCB6D003E2921 /* ArticleDetailViewController.swift */; };
+		0F678FBF23EDD123003E2921 /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F678FBE23EDD123003E2921 /* ArticleDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		0F678FAF23EC8622003E2921 /* NYTTopStoriesApIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTTopStoriesApIClient.swift; sourceTree = "<group>"; };
 		0F678FB523EC8BDD003E2921 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		0F678FBA23EDB6E0003E2921 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		0F678FBC23EDCB6D003E2921 /* ArticleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewController.swift; sourceTree = "<group>"; };
+		0F678FBE23EDD123003E2921 /* ArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,7 @@
 				0F678FA723EC6E8D003E2921 /* SettingsViewController.swift */,
 				0F678FA323EC6E50003E2921 /* NewsFeedViewController.swift */,
 				0F678FA523EC6E72003E2921 /* SavedArticleViewController.swift */,
+				0F678FBC23EDCB6D003E2921 /* ArticleDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 			children = (
 				0F678FAA23EC714F003E2921 /* NewsFeedView.swift */,
 				0F678FBA23EDB6E0003E2921 /* NewsCell.swift */,
+				0F678FBE23EDD123003E2921 /* ArticleDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -269,7 +275,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F678F7E23EC6B70003E2921 /* AppDelegate.swift in Sources */,
+				0F678FBF23EDD123003E2921 /* ArticleDetailView.swift in Sources */,
 				0F678FB023EC8622003E2921 /* NYTTopStoriesApIClient.swift in Sources */,
+				0F678FBD23EDCB6D003E2921 /* ArticleDetailViewController.swift in Sources */,
 				0F678FA623EC6E72003E2921 /* SavedArticleViewController.swift in Sources */,
 				0F678FA023EC6C4D003E2921 /* TopStoriesTabController.swift in Sources */,
 				0F678FAD23EC8520003E2921 /* TopStoryModel.swift in Sources */,

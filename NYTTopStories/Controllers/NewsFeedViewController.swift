@@ -80,4 +80,18 @@ extension NewsFeedViewController: UICollectionViewDelegateFlowLayout {
         let itemHeight: CGFloat = maxSize.height * 0.30
         return CGSize(width: itemWidth, height: itemHeight)
     }
+    
+    // this is the way how we segue to anothr VC
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let article = newsArticles[indexPath.row]
+        let articleDVC = ArticleDetailViewController()
+        
+        // TODO: after assessment we will be using initializers as dependancy injection mechanism
+        articleDVC.article = article
+        
+        // we cannot use navigation controller to push viewcontroller
+        // UNTIL WE EMBADE IT TO NAVIGATION CONTROLLER
+        navigationController?.pushViewController(articleDVC, animated: true)
+        // because we have never embadded a navigationcontroller
+    }
 }

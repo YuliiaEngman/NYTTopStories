@@ -105,7 +105,7 @@ struct TopStories: Codable {
 
 
 extension Article { // article.getArticleImageURL(.superJumbo)
-    func getArticleImageURL(for imageFormat: ImageFormat) -> String { // we created enum to make it type safe instead of user 
+    func getArticleImageURL(for imageFormat: ImageFormat) -> String { // we created enum to make it type safe instead that we will not make mistake in code
         let results = multimedia.filter { $0.format == imageFormat.rawValue } // means "thumbLarge" == "thumbLarge"
         guard let multimediaImage = results.first else { // if result is 0 i return "Normal" image
             return ""
