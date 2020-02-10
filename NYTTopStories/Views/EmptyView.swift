@@ -10,6 +10,8 @@ import UIKit
 
     class EmptyView: UIView {
         
+        // We added it to the code of SavedArticlesVC line 32
+        
         // title and message
         
         public lazy var titleLabel: UILabel = {

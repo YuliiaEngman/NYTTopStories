@@ -33,7 +33,7 @@ class NewsFeedViewController: UIViewController {
     }
 
     //STEP 5 USerDefaults:
-    private var sectionName = "Technology"
+    private var sectionNameInsideNewsFeedVC = "Technology"
 //    didSet {
 //        // TODO:
 //    }
@@ -47,6 +47,9 @@ class NewsFeedViewController: UIViewController {
         view.backgroundColor = .systemBackground // white during the day and dark during the dark mode is on
         newsFeedView.collectionView.delegate = self
         newsFeedView.collectionView.dataSource = self
+        
+        // setup search bar
+        newsFeedView.searchBar.delegate = self
         
         // register a collectionView cell
         // we use generic cell
@@ -71,14 +74,17 @@ class NewsFeedViewController: UIViewController {
         //retrieve section name from UserDefaults:
         if let sectionName = UserDefaults.standard.object(forKey: UserKey.sectionName) as? String {
            // self.sectionName = sectionName
-            if sectionName != self.sectionName { // if business == business id does not reset my API - will not go below
+            if sectionName != self.sectionNameInsideNewsFeedVC { // if business == business id does not reset my API - will not go below
                 // we are looking at a new section
                 // make a new query
                 queryAPI(for: sectionName) // from SettingVC
-                self.sectionName = sectionName            }
+                self.sectionNameInsideNewsFeedVC = sectionName
+        } else {
+            queryAPI(for: sectionName)
+            }
         } else {
             // use the default section name
-            queryAPI(for: sectionName) // from default Technology
+            queryAPI(for: sectionNameInsideNewsFeedVC) // from default Technology
         }
 
      }
@@ -139,5 +145,30 @@ extension NewsFeedViewController: UICollectionViewDelegateFlowLayout {
         // UNTIL WE EMBADE IT TO NAVIGATION CONTROLLER
         navigationController?.pushViewController(articleDVC, animated: true)
         // because we have never embadded a navigationcontroller
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if newsFeedView.searchBar.isFirstResponder {
+            newsFeedView.searchBar.resignFirstResponder()
+        }
+    }
+}
+
+extension NewsFeedViewController: UISearchBarDelegate {
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        print("\(searchBar.searchTextField.text)")
+//    }
+    
+    // changes while typing
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+       // print(searchText)
+        guard !searchText.isEmpty else {
+            // if text is empty reload all the article
+            fetchStories()
+            return
+        }
+        // cv
+        // filter artyicles based on searchText
+        newsArticles = newsArticles.filter { $0.title.lowercased().contains(searchText.lowercased())}
     }
 }
