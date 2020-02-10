@@ -107,7 +107,13 @@ extension SavedArticleViewController: UICollectionViewDelegateFlowLayout {
     
     // segue programmatically
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        <#code#>
+        let article = savedArticles[indexPath.row]
+        let detailVC = ArticleDetailViewController()
+        detailVC.article = article
+        // we need to pass it over - other way it will be nil abd crash
+        // we have method to check if the object was already saved (avoid duplicates) - go to Alex's Github -> DataPersistance -. .hasItemBeedSaved
+        detailVC.dataPersistance = dataPersistance
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
