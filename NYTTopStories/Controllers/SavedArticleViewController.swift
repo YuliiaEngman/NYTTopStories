@@ -54,7 +54,7 @@ class SavedArticleViewController: UIViewController {
         savedArticleView.collectionView.dataSource = self
         savedArticleView.collectionView.delegate = self
         
-        savedArticleView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "savedArticleCell")
+        savedArticleView.collectionView.register(SavedArticleCell.self, forCellWithReuseIdentifier: "savedArticleCell")
     }
     
     // DP Step 12. Conforming to the DataPersistanceDelegate
@@ -71,9 +71,18 @@ extension SavedArticleViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return savedArticles.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "savedArticleCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "savedArticleCell", for: indexPath) as? SavedArticleCell else {
+            fatalError("could not downcast to SavedArticleCell")
+        }
+        let savedArticle = savedArticles[indexPath.row]
         cell.backgroundColor = .systemBackground
+        cell.configureCell(for: savedArticle)
+        
+        // STEP 4 DELEGATE - Register a delegate - we get an error so go to step 5 (extension)
+        cell.delegate = self
+        
         return cell
     }
 }
@@ -95,6 +104,11 @@ extension SavedArticleViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 10)
     }
+    
+    // segue programmatically
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        <#code#>
+    }
 }
 
 
@@ -106,7 +120,40 @@ extension SavedArticleViewController: DataPersistenceDelegate {
 
     }
     func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        print("item was deleted")
+        //print("item was deleted")
+        fetchSavedArticles()
+    }
+}
+
+// Step 5 TO SET DELEGATION
+extension SavedArticleViewController: SavedArticlwCellDelegate {
+    func didSelectMoreButton(_ savedArticleCell: SavedArticleCell, article: Article) {
+        print("didSelectMoreButton: \(article.title)")
+        
+        // create action sheet
+        // cancel action and delete action
+        // post MVP shareAction
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) {
+            alertAction in
+            self.deleteArticle(article)
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        present(alertController, animated: true)
+    }
+    
+    private func deleteArticle(_ article: Article) {
+        guard let index = savedArticles.firstIndex(of: article) else {
+            return
+        }
+        do {
+            try dataPersistance.deleteItem(at: index)
+        } catch {
+            print("error deleting article: \(error)")
+        }
     }
 }
 

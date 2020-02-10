@@ -23,6 +23,7 @@ class NewsFeedViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.newsFeedView.collectionView.reloadData()
+                self.navigationItem.title = (self.newsArticles.first?.section.capitalized ?? "") + " News"
             }
         }
     }
@@ -31,6 +32,16 @@ class NewsFeedViewController: UIViewController {
         view = newsFeedView
     }
 
+    //STEP 5 USerDefaults:
+    private var sectionName = "Technology"
+//    didSet {
+//        // TODO:
+//    }
+
+    // STEP 6: UserDefault:
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground // white during the day and dark during the dark mode is on
@@ -44,10 +55,35 @@ class NewsFeedViewController: UIViewController {
         // register a NewCell
         newsFeedView.collectionView.register(NewsCell.self, forCellWithReuseIdentifier: "articleCell")
         
-        fetchStroies()
+        //fetchStories()
     }
     
-       private func fetchStroies(for section: String = "Technology") {
+// Step 6 User Defaults:
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        fetchStories()
+    }
+    
+       private func fetchStories(for section: String = "Technology") {
+        
+        //STEP 4 USerDefaults:
+        
+        //retrieve section name from UserDefaults:
+        if let sectionName = UserDefaults.standard.object(forKey: UserKey.sectionName) as? String {
+           // self.sectionName = sectionName
+            if sectionName != self.sectionName { // if business == business id does not reset my API - will not go below
+                // we are looking at a new section
+                // make a new query
+                queryAPI(for: sectionName) // from SettingVC
+                self.sectionName = sectionName            }
+        } else {
+            // use the default section name
+            queryAPI(for: sectionName) // from default Technology
+        }
+
+     }
+    
+    private func queryAPI(for section: String) {
          NYTTopStoriesApIClient.fetchTopStories(for: section) {[weak self](result) in
              switch result {
              case .failure(let appError):
@@ -57,7 +93,7 @@ class NewsFeedViewController: UIViewController {
                 self?.newsArticles = articles
              }
          }
-     }
+    }
 
 }
 

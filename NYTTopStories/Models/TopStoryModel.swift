@@ -85,7 +85,7 @@ struct TopStories: Codable & Equatable {
        let title: String
        let abstract: String
        let publishedDate: String
-       let multimedia: [Multimedia]
+       let multimedia: [Multimedia]?
        private enum CodingKeys: String, CodingKey {
            case section
            case title
@@ -106,6 +106,7 @@ struct TopStories: Codable & Equatable {
 
 extension Article { // article.getArticleImageURL(.superJumbo)
     func getArticleImageURL(for imageFormat: ImageFormat) -> String { // we created enum to make it type safe instead that we will not make mistake in code
+        guard let multimedia = multimedia else { return ""}
         let results = multimedia.filter { $0.format == imageFormat.rawValue } // means "thumbLarge" == "thumbLarge"
         guard let multimediaImage = results.first else { // if result is 0 i return "Normal" image
             return ""
